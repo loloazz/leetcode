@@ -49,7 +49,7 @@ public class tree_ {
     }
 
 
-    public static void pos(node head) {
+    public static void posOrder(node head) {
         /*
          * 后序遍历：
          * 需要两个栈   一个s1 一个s2
@@ -92,6 +92,31 @@ public class tree_ {
         }
 
     }
+
+    public static void middleOrder(node head) {
+        /*   这里没有右树的概念   右 -》 左头右   右在循环
+        * 中序：
+        * 1.先把每颗子树，整个左边界进栈，依次弹出的过程中打印，对弹出节点的右树 接着执行以上操作
+        *
+        * */
+
+        if (head!=null){
+            Stack<node> s1 = new Stack<>();
+            while (!s1.isEmpty()||head !=null){
+                if (head!=null){
+                    s1.push(head);
+                    head = head.left;
+                }else {
+                    head = s1.pop();
+                    System.out.println(head.data);
+                     head = head.right;
+                }
+
+            }
+        }
+
+    }
+
 
 
 }
