@@ -1,5 +1,7 @@
 package _3.二叉树的非递归遍历;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -84,7 +86,7 @@ public class tree_ {
             }
 
             // 上面的完成后，对s2依次出栈
-            while (!s2.isEmpty()){
+            while (!s2.isEmpty()) {
                 System.out.println(s2.pop().data);
             }
 
@@ -95,21 +97,21 @@ public class tree_ {
 
     public static void middleOrder(node head) {
         /*   这里没有右树的概念   右 -》 左头右   右在循环
-        * 中序：
-        * 1.先把每颗子树，整个左边界进栈，依次弹出的过程中打印，对弹出节点的右树 接着执行以上操作
-        *
-        * */
+         * 中序：
+         * 1.先把每颗子树，整个左边界进栈，依次弹出的过程中打印，对弹出节点的右树 接着执行以上操作
+         *
+         * */
 
-        if (head!=null){
+        if (head != null) {
             Stack<node> s1 = new Stack<>();
-            while (!s1.isEmpty()||head !=null){
-                if (head!=null){
+            while (!s1.isEmpty() || head != null) {
+                if (head != null) {
                     s1.push(head);
                     head = head.left;
-                }else {
+                } else {
                     head = s1.pop();
                     System.out.println(head.data);
-                     head = head.right;
+                    head = head.right;
                 }
 
             }
@@ -117,6 +119,40 @@ public class tree_ {
 
     }
 
+
+    public static void width(node head) {
+        /*
+         * 宽度优先遍历：
+         * 使用队列：
+         * 1. 先进左节点，在进入右节点
+         * 2. 弹出就打印
+         * 3. 重复 1 2
+         * */
+
+        if (head != null) {
+            // linkedList 是双向链表，可被用做队列
+            Queue<node> queue = new LinkedList<>();
+            // TODO: 2021/8/15   先把头节点入队
+            queue.add(head);
+            while (!queue.isEmpty()) {
+                node cur = queue.poll();
+                System.out.println(cur.data); // 弹出打印
+
+
+                if (head.left != null) {
+                    queue.add(head.left); //入对
+                }
+
+                if (head.right != null) {
+                    queue.add(head.right); // 入队
+                }
+            }
+
+
+        }
+
+
+    }
 
 
 }
